@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ComfyUI-PhotoCraft Panel</title>
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+<header>
+  <h1>ComfyUI-PhotoCraft</h1>
+  <p class="subtitle">Standalone side panel — runs next to PhotoCraft, not inside it. Loopback only.</p>
+  <p id="status">disconnected</p>
+</header>
+<nav class="tabs" role="tablist">
+  <button class="tab active" data-tab="ai">Ai Panel</button>
+  <button class="tab" data-tab="settings">Settings</button>
+  <button class="tab" data-tab="web">ComfyUI Web</button>
+</nav>
+<main>
+  <section id="tab-ai" class="panel active">
+    <div class="grid">
+      <div class="col">
+        <label>Positive prompt <textarea id="positive" rows="4">a clean, detailed image</textarea></label>
+        <label>Negative prompt <textarea id="negative" rows="3">blurry, low quality, artifacts</textarea></label>
+        <label>Seed <input id="seed" type="number" value="0" /></label>
+        <label>Slider <input id="slider" type="range" min="0" max="1" step="0.01" value="0.7" /> <span id="sliderVal">0.70</span></label>
+        <label>Layer name <input id="layerName" value="ComfyUI Result" /></label>
+        <label>Selection bounds (x,y,w,h) <input id="selectionBounds" value="0,0,0,0" /></label>
+        <label>Selection mode
+          <select id="selectionMode">
+            <option value="new">new</option>
+            <option value="add">add</option>
+            <option value="subtract">subtract</option>
+            <option value="intersect">intersect</option>
+          </select>
+        </label>
+        <label><input id="cropToSelection" type="checkbox" /> Crop to selection</label>
+        <label><input id="preserveSelection" type="checkbox" checked /> Preserve selection</label>
+        <label>Margin <input id="margin" type="number" value="0" /></label>
+        <label>Play on channels
+          <select id="channels"><option value="all">all</option><option value="red">red</option><option value="green">green</option><option value="blue">blue</option><option value="alpha">alpha</option></select>
+        </label>
+        <label>Workflow
+          <select id="workflow">
+            <option value="pc_sd15_txt2img">SD1.5 Text to Image</option>
+            <option value="pc_sd15_inpaint">SD1.5 Inpaint</option>
+            <option value="pc_sd15_controlnet">SD1.5 ControlNet</option>
+            <option value="pc_sd15_upscale">SD1.5 Upscale</option>
+            <option value="pc_sdxl_txt2img">SDXL Text to Image</option>
+          </select>
+        </label>
+        <div class="actions">
+          <button id="queueBtn">Queue</button>
+          <button id="applyBtn">Apply back to PhotoCraft</button>
+        </div>
+        <progress id="progress" value="0" max="100"></progress>
+        <p id="progressText"></p>
+      </div>
+      <div class="col">
+        <h2>Canvas</h2>
+        <input id="canvasFile" type="file" accept="image/*" />
+        <canvas id="canvasPreview" width="512" height="512"></canvas>
+        <h2>Mask</h2>
+        <input id="maskFile" type="file" accept="image/*" />
+        <canvas id="maskPreview" width="512" height="256"></canvas>
+        <h2>Result</h2>
+        <img id="resultPreview" alt="Render result will appear here" />
+        <p id="resultInfo"></p>
+      </div>
+    </div>
+  </section>
+  <section id="tab-settings" class="panel">
+    <label>Backend host <input id="backendHost" value="127.0.0.1" /></label>
+    <label>Backend port <input id="backendPort" type="number" value="8190" /></label>
+    <label>Backend token (from your private token file) <input id="token" type="password" placeholder="paste token; never stored in the repo" /></label>
+    <label>ComfyUI host <input id="comfyHost" value="127.0.0.1" /></label>
+    <label>ComfyUI port <input id="comfyPort" type="number" value="8188" /></label>
+    <label>PhotoCraft control port (live mode) <input id="controlPort" type="number" value="7878" /></label>
+    <button id="connectBtn">Connect</button>
+    <button id="disconnectBtn">Disconnect</button>
+    <p class="hint">Tokens live only in your browser session / private files. This panel never writes them into the repo.</p>
+  </section>
+  <section id="tab-web" class="panel">
+    <p>Open ComfyUI in a new tab (same machine):</p>
+    <a id="comfyLink" href="http://127.0.0.1:8188" target="_blank" rel="noopener">http://127.0.0.1:8188</a>
+    <p class="hint">The panel and ComfyUI run side by side; the panel is not embedded in PhotoCraft.</p>
+  </section>
+</main>
+<script src="../js/connection.js"></script>
+<script src="../js/manager.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

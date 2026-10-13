@@ -1,0 +1,19 @@
+:root { color-scheme: light dark; }
+* { box-sizing: border-box; }
+body { font-family: system-ui, sans-serif; margin: 0; padding: 16px; }
+header { border-bottom: 1px solid #888; padding-bottom: 8px; }
+.subtitle { color: #666; margin: 4px 0; }
+.tabs { display: flex; gap: 8px; margin: 12px 0; }
+.tab { padding: 8px 14px; cursor: pointer; }
+.tab.active { font-weight: 700; }
+.panel { display: none; }
+.panel.active { display: block; }
+.grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.col { display: flex; flex-direction: column; gap: 10px; }
+label { display: flex; flex-direction: column; gap: 4px; }
+input, textarea, select { padding: 6px; font: inherit; }
+.actions { display: flex; gap: 8px; }
+button { padding: 8px 12px; cursor: pointer; }
+canvas, #resultPreview { border: 1px solid #888; max-width: 100%; background: #eee; }
+.hint { color: #666; }
+@media (max-width: 800px) { .grid { grid-template-columns: 1fr; } }

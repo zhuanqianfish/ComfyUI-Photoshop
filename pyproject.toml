@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "comfyui-photocraft"
+version = "0.1.0"
+description = "Original bridge letting PhotoCraft users run ComfyUI AI generation / inpaint / redraw and bring results back into PhotoCraft."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "ComfyUI-PhotoCraft Contributors" }]
+# No runtime dependencies are declared on purpose: this plugin uses only
+# the Python standard library plus whatever ComfyUI already provides
+# (torch / Pillow / aiohttp in a real ComfyUI install). Nothing is
+# auto-installed by this file.
+dependencies = []
+
+[tool.setuptools]
+packages = ["py"]
